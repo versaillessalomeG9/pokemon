@@ -1,0 +1,41 @@
+class Pokemon{
+    constructor(name, attack, defense, hp, luck){
+        this.name = name;
+        this.attack = attack;
+        this.defense = defense;
+        this.hp = hp;
+        this.luck = luck;
+    }
+
+    isLucky(){
+        return Math.random() < this.luck;
+    }
+
+    attackPokemon(Pokemon){
+        if(this.isLucky()){
+            Pokemon.hp -= this.attack - Pokemon.defense;
+            console.log(this.name + " a chancé !")
+        } 
+    }
+}
+
+let Tiplouf = new Pokemon ('Tiplouf', 50, 10, 100, 0.7);
+let Salameche = new Pokemon ('Salameche', 30, 20, 120, 0.6);
+
+while (Tiplouf.hp > 0 && Salameche.hp > 0){
+    Tiplouf.attackPokemon(Salameche);
+    console.log (" Salameche a ", Salameche.hp, "hp!");
+    if (Salameche.hp > 0){
+    Salameche.attackPokemon(Tiplouf);
+    console.log("Tiplouf a", Tiplouf.hp, "hp!" )
+    }else {
+        break;
+    }
+    
+}
+
+if (Tiplouf.hp <= 0) {
+    console.log("Tiplouf dead !");
+} else if (Salameche.hp <= 0){
+    console.log(" Salameche dead !")
+}
